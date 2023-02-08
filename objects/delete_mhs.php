@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 //include_once untuk menyertakan file lain supaya tidak menuliskan perintah yang berulangkali, namumpemanggilan hanya sekali
-include_once '../dbconfig/database.php';
+include_once '../config/database.php';
 include_once '../objects/mahasiswa.php';
 
 //koneksi ke class database
