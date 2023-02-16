@@ -29,13 +29,11 @@ if ($num>0){
             "tempat_lahir"=>$tempat_lahir, "tanggal_lahir"=>$tanggal_lahir, "alamat"=>$alamat);            
     }
 
-    $jumlahDataPerHalaman = count($mhs_item);
     // format json yang akan dikirim ke client
     $respone = array(
         /*jika semua kondisi terpenuhi maka akan menampilkan respon sukses 
         dan menampilkan data dari mahasiswa yg dipanggil nimnya*/
         'status'=>array(
-            'jumlah data dalam halaman'=>$jumlahDataPerHalaman,
             'message'=>'success', 'code'=>http_response_code(200)
         ), 'data'=> $mhs_item
     );
@@ -49,4 +47,4 @@ if ($num>0){
         );
 }
 // menampilkan nilai dari variabel $respone
-echo json_encode($respone);
+echo json_encode($respone["data"]);

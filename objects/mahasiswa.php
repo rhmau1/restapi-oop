@@ -8,11 +8,12 @@ class Mahasiswa{
     public $jenis_kelamin;
     public $tempat_lahir;
     public $tanggal_lahir;
-    public $alamat;
+    public $alamat;    
 
     private $kon;
     // nama tabel disamakan dengan nama tabel di database
     private $tabel = "tbl_mahasiswa";
+    public $page;
 
     // __construct fungsi yang akan dijalankan pertama kali otomatis tanpa dipanggil lagi saat instansiasi
     public function __construct($dbname){
@@ -22,6 +23,25 @@ class Mahasiswa{
     /* nama function: function get
     function get untuk mendapatkan semua data mahasiswa yang ada di dalam tabel mahasiswa dan menampilkannya    
     route: localhost/restapiphp1/objects/get_mhs.php */
+    function get_byPage(){
+        if(isset($_GET['page']) && $_GET['page']>0){
+            $page = $_GET['page'];
+            $awalData = ($page - 1)*10;
+
+            // mempersiapkan query yang akan dijalankan
+        $query = "SELECT * FROM " . $this->tabel . " LIMIT $awalData,10";
+        $stmt = $this->kon->prepare($query);
+
+        // mengeksekusi variabel $stmt
+        $stmt->execute();
+
+        // mengembalikan nilai dari variabel $stmt 
+        return $stmt;
+        }else{
+           return "get ['page'] not found";
+        }
+    }
+
     function get_mhs(){
         // mempersiapkan query yang akan dijalankan
         $query = "SELECT * FROM " . $this->tabel . "";

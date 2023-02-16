@@ -4,9 +4,8 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 //include_once untuk menyisipkan file namun pemanggilannya hanya sekali
-include_once '../config/database.php';
+include '../config/database.php';
 include_once '../objects/mahasiswa.php';
-
 // instansiasi class database
 $database = new Database();
 $dbname = $database->koneksi();
@@ -15,9 +14,14 @@ $dbname = $database->koneksi();
 $mahasiswa = new Mahasiswa($dbname);
 
 // memanggil query get_mhs di kelas mahasiswa
-$stmt = $mahasiswa->get_mhs();
-$num = $stmt->rowCount();
+$stmt = $mahasiswa->get_byPage();
 
+if(is_string($stmt)){
+    echo $stmt;
+    exit; 
+}
+$page = $_GET['page'];
+$num = $stmt->rowCount();
 $respone = [];
 if ($num>0){ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -36,6 +40,7 @@ if ($num>0){
         dan menampilkan data dari mahasiswa yg dipanggil nimnya*/
         'status'=>array(
             'jumlah data dalam halaman'=>$jumlahDataPerHalaman,
+            'halaman aktif'=>$page,
             'message'=>'success', 'code'=>http_response_code(200)
         ), 'data'=> $mhs_item
     );
