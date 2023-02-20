@@ -6,6 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 //include_once untuk menyisipkan file namun pemanggilannya hanya sekali
 include_once '../config/database.php';
 include_once '../objects/mahasiswa.php';
+
 // instansiasi class database
 $database = new Database();
 $dbname = $database->koneksi();
@@ -14,15 +15,9 @@ $dbname = $database->koneksi();
 $mahasiswa = new Mahasiswa($dbname);
 
 // memanggil query get_mhs di kelas mahasiswa
-$stmt = $mahasiswa->search_mhs();
-
-if(isset($_GET['keyword'])){
-    $stmt = $mahasiswa->search_mhs();
-} else {
-    $stmt = $mahasiswa->get_mhs();
-}
+$stmt = $mahasiswa->get_mhs();
 $num = $stmt->rowCount();
-// $keyword = $_GET['keyword'];
+
 $respone = [];
 if ($num>0){ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -34,14 +29,11 @@ if ($num>0){
             "tempat_lahir"=>$tempat_lahir, "tanggal_lahir"=>$tanggal_lahir, "alamat"=>$alamat);            
     }
 
-    $jumlahDataPerHalaman = count($mhs_item); 
-    
     // format json yang akan dikirim ke client
     $respone = array(
         /*jika semua kondisi terpenuhi maka akan menampilkan respon sukses 
         dan menampilkan data dari mahasiswa yg dipanggil nimnya*/
         'status'=>array(
-            'jumlah data dalam pencarian'=>$jumlahDataPerHalaman,
             'message'=>'success', 'code'=>http_response_code(200)
         ), 'data'=> $mhs_item
     );
@@ -55,4 +47,4 @@ if ($num>0){
         );
 }
 // menampilkan nilai dari variabel $respone
-echo json_encode($respone);
+echo json_encode($respone["data"]);

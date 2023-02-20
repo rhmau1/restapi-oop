@@ -14,16 +14,15 @@ $dbname = $database->koneksi();
 $mahasiswa = new Mahasiswa($dbname);
 
 
-// memanggil query get_mhs di kelas mahasiswa
+$stmt = $mahasiswa->sorting_asc();
+
 if(isset($_GET['kolom'])){
     $stmt = $mahasiswa->sorting_asc();
-} else {
+}else{
     $stmt = $mahasiswa->get_mhs();
 }
-// $stmt = $mahasiswa->sorting_asc();
 
 $num = $stmt->rowCount();
-$kolom = $_GET['kolom'];
 $respone = [];
 if ($num>0){ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
