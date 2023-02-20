@@ -14,7 +14,7 @@ class Mahasiswa{
     // nama tabel disamakan dengan nama tabel di database
     private $tabel = "tbl_mahasiswa";
     public $page;
-
+    
     // __construct fungsi yang akan dijalankan pertama kali otomatis tanpa dipanggil lagi saat instansiasi
     public function __construct($dbname){
         $this->kon = $dbname;
@@ -27,7 +27,7 @@ class Mahasiswa{
         if(isset($_GET['page']) && $_GET['page']>0){
             $page = $_GET['page'];
             $awalData = ($page - 1)*10;
-
+            
             // mempersiapkan query yang akan dijalankan
         $query = "SELECT * FROM " . $this->tabel . " LIMIT $awalData,10";
         $stmt = $this->kon->prepare($query);
@@ -38,10 +38,71 @@ class Mahasiswa{
         // mengembalikan nilai dari variabel $stmt 
         return $stmt;
         }else{
-           return "get ['page'] not found";
+            $query1 = "SELECT * FROM " . $this->tabel . "";
+            $result = $this->kon->prepare($query1);
+            $result->execute();            
+            return $result;
+        }
+        
+    }
+    
+    
+    function search_mhs(){
+        if(isset($_GET['keyword'])){
+            $keyword = $_GET['keyword'];
+            
+            // mempersiapkan query yang akan dijalankan
+        $query = "SELECT * FROM " . $this->tabel . " WHERE nama LIKE '%$keyword%' OR 
+        nim LIKE '%$keyword%' OR 
+        tempat_lahir LIKE '%$keyword%' OR 
+        tanggal_lahir LIKE '%$keyword%' OR 
+        alamat LIKE '%$keyword%' ";
+        $stmt = $this->kon->prepare($query);
+
+        // mengeksekusi variabel $stmt
+        $stmt->execute();
+
+        // mengembalikan nilai dari variabel $stmt 
+        return $stmt;
+        }else{
+           return "data yang dicari tidak ada";
+        }
+        
+    }
+
+    function sorting_asc(){
+        if(isset($_GET['kolom'])){
+            $kolom = $_GET['kolom'];
+
+            $query ="SELECT * FROM " . $this->tabel . " ORDER BY $kolom ASC";
+            
+            $stmt = $this->kon->prepare($query);
+
+            $stmt->execute();
+            
+            return $stmt;
+        }else{
+            return "order tidak tersedia";
         }
     }
 
+    function sorting_desc(){
+        if(isset($_GET['kolom'])){
+            $kolom = $_GET['kolom'];
+
+            $query ="SELECT * FROM " . $this->tabel . " ORDER BY $kolom DESC";
+            
+            $stmt = $this->kon->prepare($query);
+
+            $stmt->execute();
+            
+            return $stmt;
+        }else{
+            return "order tidak tersedia";
+        }
+    }
+    
+    
     function get_mhs(){
         // mempersiapkan query yang akan dijalankan
         $query = "SELECT * FROM " . $this->tabel . "";

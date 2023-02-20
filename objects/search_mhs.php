@@ -1,4 +1,4 @@
-<?php 
+ <?php 
 //untuk mengakses fetch json beda domain, supaya dapat menerima permintaan dari domain lain
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -14,14 +14,15 @@ $dbname = $database->koneksi();
 $mahasiswa = new Mahasiswa($dbname);
 
 // memanggil query get_mhs di kelas mahasiswa
-if(isset($_GET['page'])){
-    $stmt = $mahasiswa->get_byPage();
+$stmt = $mahasiswa->search_mhs();
+
+if(isset($_GET['keyword'])){
+    $stmt = $mahasiswa->search_mhs();
 } else {
     $stmt = $mahasiswa->get_mhs();
 }
-
 $num = $stmt->rowCount();
-// $page = $_GET['page'];
+// $keyword = $_GET['keyword'];
 $respone = [];
 if ($num>0){ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -40,8 +41,7 @@ if ($num>0){
         /*jika semua kondisi terpenuhi maka akan menampilkan respon sukses 
         dan menampilkan data dari mahasiswa yg dipanggil nimnya*/
         'status'=>array(
-            'jumlah data dalam halaman'=>$jumlahDataPerHalaman,
-            // 'halaman aktif'=>$page,
+            'jumlah data dalam pencarian'=>$jumlahDataPerHalaman,
             'message'=>'success', 'code'=>http_response_code(200)
         ), 'data'=> $mhs_item
     );

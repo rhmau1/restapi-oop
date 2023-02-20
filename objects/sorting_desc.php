@@ -13,15 +13,17 @@ $dbname = $database->koneksi();
 // instansiasi class mahasiswa
 $mahasiswa = new Mahasiswa($dbname);
 
+
 // memanggil query get_mhs di kelas mahasiswa
-if(isset($_GET['page'])){
-    $stmt = $mahasiswa->get_byPage();
+if(isset($_GET['kolom'])){
+    $stmt = $mahasiswa->sorting_desc();
 } else {
     $stmt = $mahasiswa->get_mhs();
 }
+// $stmt = $mahasiswa->sorting_asc();
 
 $num = $stmt->rowCount();
-// $page = $_GET['page'];
+$kolom = $_GET['kolom'];
 $respone = [];
 if ($num>0){ 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
