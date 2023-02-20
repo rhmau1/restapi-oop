@@ -46,17 +46,18 @@ class Mahasiswa{
         
     }
     
-    
     function search_mhs(){
         if(isset($_GET['keyword'])){
             $keyword = $_GET['keyword'];
             
             // mempersiapkan query yang akan dijalankan
-        $query = "SELECT * FROM " . $this->tabel . " WHERE nama LIKE '%$keyword%' OR 
-        nim LIKE '%$keyword%' OR 
+        $query = "SELECT * FROM " . $this->tabel . "WHERE 
+        nim LIKE '$keyword' OR 
+        nama LIKE '$keyword' OR 
+        jenis_kelamin LIKE '%$keyword%' OR 
         tempat_lahir LIKE '%$keyword%' OR 
         tanggal_lahir LIKE '%$keyword%' OR 
-        alamat LIKE '%$keyword%' ";
+        alamat LIKE '%$keyword%' OR ";
         $stmt = $this->kon->prepare($query);
 
         // mengeksekusi variabel $stmt

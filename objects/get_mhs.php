@@ -30,7 +30,7 @@ if ($num>0){
     $jumlahSeluruhData = count($mhs_item);
     // format json yang akan dikirim ke client
     $respone = array(
-        'draw'=>5,
+        'draw'=>1,
             'recordsTotal'=>$jumlahSeluruhData,
             'recordsFiltered'=>$jumlahSeluruhData,
         /*jika semua kondisi terpenuhi maka akan menampilkan respon sukses 
