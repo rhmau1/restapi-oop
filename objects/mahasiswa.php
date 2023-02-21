@@ -70,11 +70,12 @@ class Mahasiswa{
         
     }
 
-    function sorting_asc(){
-        if(isset($_GET['kolom'])){
+    function sorting(){
+        if(isset($_GET['kolom'])&&($_GET['order'])){
             $kolom = $_GET['kolom'];
+            $order = $_GET['order'];
 
-            $query ="SELECT * FROM " . $this->tabel . " ORDER BY $kolom ASC";
+            $query ="SELECT * FROM " . $this->tabel . " ORDER BY $kolom $order";
             
             $stmt = $this->kon->prepare($query);
 
@@ -86,25 +87,7 @@ class Mahasiswa{
 
         }
         
-    }
-
-    function sorting_desc(){
-        if(isset($_GET['kolom'])){
-            $kolom = $_GET['kolom'];
-
-            $query ="SELECT * FROM " . $this->tabel . " ORDER BY $kolom DESC";
-            
-            $stmt = $this->kon->prepare($query);
-
-            $stmt->execute();
-            
-            return $stmt;
-        }else{
-            return "order tidak tersedia";
-
-        }
-        
-    }
+    }    
     
     function get_mhs(){
         // mempersiapkan query yang akan dijalankan

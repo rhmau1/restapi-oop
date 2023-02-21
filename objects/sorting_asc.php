@@ -14,10 +14,10 @@ $dbname = $database->koneksi();
 $mahasiswa = new Mahasiswa($dbname);
 
 
-$stmt = $mahasiswa->sorting_asc();
+$stmt = $mahasiswa->sorting();
 
-if(isset($_GET['kolom'])){
-    $stmt = $mahasiswa->sorting_asc();
+if(isset($_GET['kolom'])&&($_GET['order'])){
+    $stmt = $mahasiswa->sorting();
 }else{
     $stmt = $mahasiswa->get_mhs();
 }
