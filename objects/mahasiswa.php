@@ -56,7 +56,8 @@ class Mahasiswa{
         nim LIKE '%$keyword%' OR 
         tempat_lahir LIKE '%$keyword%' OR 
         tanggal_lahir LIKE '%$keyword%' OR 
-        alamat LIKE '%$keyword%' ";
+        alamat LIKE '%$keyword%' OR 
+        jenis_kelamin LIKE '%$keyword%' ";
         $stmt = $this->kon->prepare($query);
 
         // mengeksekusi variabel $stmt
