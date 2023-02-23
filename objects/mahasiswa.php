@@ -109,7 +109,7 @@ class Mahasiswa{
             return $stmt;
             // return "order tidak tersedia";
             
-        }else{
+        }elseif($gender == 'P'){
             $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan'";
             // $query = "SELECT * FROM " . $this->tabel . " m          
             //     WHERE
@@ -122,27 +122,38 @@ class Mahasiswa{
             return $stmt;
             // return "order tidak tersedia";
             
+        }else{
+            
+        $query = "SELECT * FROM " . $this->tabel . "";
+        $stmt = $this->kon->prepare($query);
+
+        // mengeksekusi variabel $stmt
+        $stmt->execute();
+
+        // mengembalikan nilai dari variabel $stmt 
+        return $stmt;
+            
         }
         
     }
 
-    function filtering1(){
-        // if(isset($_GET['gender'])){
-        //     $kolom = $_GET['gender'];
+    // function filtering1(){
+    //     // if(isset($_GET['gender'])){
+    //     //     $kolom = $_GET['gender'];
 
-            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan' ";
+    //         $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan' ";
             
-            $stmt = $this->kon->prepare($query);
+    //         $stmt = $this->kon->prepare($query);
 
-            $stmt->execute();
+    //         $stmt->execute();
             
-            return $stmt;
-        // }else{
-        //     return "order tidak tersedia";
+    //         return $stmt;
+    //     // }else{
+    //     //     return "order tidak tersedia";
 
-        // }
+    //     // }
         
-    }
+    // }
     
     function get_mhs(){
         // mempersiapkan query yang akan dijalankan
