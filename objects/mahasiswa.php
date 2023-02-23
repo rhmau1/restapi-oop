@@ -91,11 +91,12 @@ class Mahasiswa{
     }    
     
         function filtering(){
-        // if(isset($_GET['gender'])&&($_GET['jk'])){
-        // $gender = $_GET['gender'];
+        if(isset($_GET['gender'])){
+        $gender = $_GET['gender'];
         // $jk = $_GET['jk'];
 
 
+    }if($gender == 'L' ){
             $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='laki-laki'";
             // $query = "SELECT * FROM " . $this->tabel . " m          
             //     WHERE
@@ -106,10 +107,22 @@ class Mahasiswa{
             $stmt->execute();
             
             return $stmt;
-        // }else{
-        //     return "order tidak tersedia";
+            // return "order tidak tersedia";
+            
+        }else{
+            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan'";
+            // $query = "SELECT * FROM " . $this->tabel . " m          
+            //     WHERE
+            //         m.jenis_kelamin = 'laki-laki'";
+            
+            $stmt = $this->kon->prepare($query);
 
-        // }
+            $stmt->execute();
+            
+            return $stmt;
+            // return "order tidak tersedia";
+            
+        }
         
     }
 

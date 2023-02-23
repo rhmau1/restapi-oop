@@ -13,16 +13,12 @@ $dbname = $database->koneksi();
 // instansiasi class mahasiswa
 $mahasiswa = new Mahasiswa($dbname);
 
+if(isset($_GET['gender'])){
+    $stmt = $mahasiswa->filtering();
+} else {
+    $stmt = $mahasiswa->get_mhs();
+}
 
-$stmt = $mahasiswa->filtering();
-
-// if(isset($_GET['gender'])&&($_GET['jk'])){
-//     $stmt = $mahasiswa->sorting();
-// }if($jk == 'perempuan'){
-//     $stmt = $mahasiswa->filtering1();
-// }else{
-//     $stmt = $mahasiswa->get_mhs();
-// }
 
 $num = $stmt->rowCount();
 $respone = [];
