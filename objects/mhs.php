@@ -20,6 +20,8 @@ if(isset($_GET['keyword'])){
     $stmt = $mahasiswa->get_byPage();
 } elseif (isset($_GET['kolom'])){
     $stmt = $mahasiswa->sorting();
+}elseif (isset($_GET['gender'])){
+    $stmt = $mahasiswa->filtering();
 }else{
     $stmt = $mahasiswa->get_mhs();
 }
