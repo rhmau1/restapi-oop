@@ -89,6 +89,47 @@ class Mahasiswa{
         
     }    
     
+        function filtering(){
+        // if(isset($_GET['gender'])&&($_GET['jk'])){
+        // $gender = $_GET['gender'];
+        // $jk = $_GET['jk'];
+
+
+            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='laki-laki'";
+            // $query = "SELECT * FROM " . $this->tabel . " m          
+            //     WHERE
+            //         m.jenis_kelamin = 'laki-laki'";
+            
+            $stmt = $this->kon->prepare($query);
+
+            $stmt->execute();
+            
+            return $stmt;
+        // }else{
+        //     return "order tidak tersedia";
+
+        // }
+        
+    }
+
+    function filtering1(){
+        // if(isset($_GET['gender'])){
+        //     $kolom = $_GET['gender'];
+
+            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan' ";
+            
+            $stmt = $this->kon->prepare($query);
+
+            $stmt->execute();
+            
+            return $stmt;
+        // }else{
+        //     return "order tidak tersedia";
+
+        // }
+        
+    }
+    
     function get_mhs(){
         // mempersiapkan query yang akan dijalankan
         $query = "SELECT * FROM " . $this->tabel . "";
