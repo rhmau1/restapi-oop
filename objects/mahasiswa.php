@@ -95,8 +95,7 @@ class Mahasiswa{
         $gender = $_GET['gender'];
         // $jk = $_GET['jk'];
 
-
-    }if($gender == 'L' ){
+    }if($gender == 'L' OR $gender == 'l' OR $gender =='laki-laki'){
             $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='laki-laki'";
             // $query = "SELECT * FROM " . $this->tabel . " m          
             //     WHERE
@@ -109,59 +108,7 @@ class Mahasiswa{
             return $stmt;
             // return "order tidak tersedia";
             
-        }elseif($gender == 'l' ){
-            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='laki-laki'";
-            // $query = "SELECT * FROM " . $this->tabel . " m          
-            //     WHERE
-            //         m.jenis_kelamin = 'laki-laki'";
-            
-            $stmt = $this->kon->prepare($query);
-
-            $stmt->execute();
-            
-            return $stmt;
-            // return "order tidak tersedia";
-            
-        }elseif($gender == 'laki-laki' ){
-            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='laki-laki'";
-            // $query = "SELECT * FROM " . $this->tabel . " m          
-            //     WHERE
-            //         m.jenis_kelamin = 'laki-laki'";
-            
-            $stmt = $this->kon->prepare($query);
-
-            $stmt->execute();
-            
-            return $stmt;
-            // return "order tidak tersedia";
-            
-        }elseif($gender == 'P'){
-            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan'";
-            // $query = "SELECT * FROM " . $this->tabel . " m          
-            //     WHERE
-            //         m.jenis_kelamin = 'laki-laki'";
-            
-            $stmt = $this->kon->prepare($query);
-
-            $stmt->execute();
-            
-            return $stmt;
-            // return "order tidak tersedia";
-            
-        }elseif($gender == 'p'){
-            $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan'";
-            // $query = "SELECT * FROM " . $this->tabel . " m          
-            //     WHERE
-            //         m.jenis_kelamin = 'laki-laki'";
-            
-            $stmt = $this->kon->prepare($query);
-
-            $stmt->execute();
-            
-            return $stmt;
-            // return "order tidak tersedia";
-            
-        }elseif($gender == 'perempuan'){
+        }elseif($gender == 'P' OR $gender == 'p' OR $gender == 'perempuan'){
             $query ="SELECT * FROM " . $this->tabel . " WHERE jenis_kelamin='perempuan'";
             // $query = "SELECT * FROM " . $this->tabel . " m          
             //     WHERE
